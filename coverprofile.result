@@ -1,0 +1,5 @@
+mode: set
+gosimpletest/services/calc.go:10.41,11.30 1 1
+gosimpletest/services/calc.go:14.2,14.29 1 1
+gosimpletest/services/calc.go:11.30,13.3 1 1
+gosimpletest/services/calc.go:17.32,19.2 1 1
