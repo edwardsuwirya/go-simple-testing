@@ -2,46 +2,53 @@ package services
 
 import (
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/suite"
 	"testing"
 )
 
-func TestCalculator_Add(t *testing.T) {
-	t.Run("Calculator Add operator testing, it should return int", func(t *testing.T) {
-		numSample1 := 10
-		numSample2 := 20
-
-		calc := Calculator{
-			Num1: numSample1,
-			Num2: numSample2,
-		}
-		result, err := calc.Add()
-		assert.Nil(t, err)
-		assert.Equal(t, 30, result)
-	})
-
-	t.Run("It should return error when receive negative value", func(t *testing.T) {
-		numSample1 := -1
-		numSample2 := 10
-		calc := Calculator{
-			Num1: numSample1,
-			Num2: numSample2,
-		}
-		result, err := calc.Add()
-
-		assert.NotNil(t, err)
-		assert.Equal(t, -1, result)
-	})
+type CalculatorTestSuite struct {
+	suite.Suite
+	calcService Calculator
 }
-func TestCalculator_Sub(t *testing.T) {
-	t.Run("Calculator Subtraction operator testing", func(t *testing.T) {
-		numSample1 := 3
-		numSample2 := 2
 
-		calc := Calculator{
-			Num1: numSample1,
-			Num2: numSample2,
+//Secara otomatis SetupTest dijalankan
+func (suite *CalculatorTestSuite) SetupTest() {
+	suite.calcService = Calculator{}
+}
+
+func (suite *CalculatorTestSuite) TestCalculator_Add() {
+	testTable := []struct {
+		num1 int
+		num2 int
+		res  int
+	}{
+		{1, 1, 2},
+		{-1, 2, -1},
+	}
+
+	for _, table := range testTable {
+		suite.calcService.Num1 = table.num1
+		suite.calcService.Num2 = table.num2
+		result, err := suite.calcService.Add()
+		if err != nil {
+			assert.NotNil(suite.T(), err)
+			assert.Equal(suite.T(), table.res, result)
+		} else {
+			assert.Nil(suite.T(), err)
+			assert.Equal(suite.T(), table.res, result)
 		}
-		result := calc.Sub()
-		assert.Equal(t, 1, result)
-	})
+
+	}
+}
+
+func (suite *CalculatorTestSuite) TestCalculator_Sub() {
+	suite.calcService.Num1 = 10
+	suite.calcService.Num2 = 1
+
+	result := suite.calcService.Sub()
+	assert.Equal(suite.T(), 9, result)
+}
+
+func TestCalculatorTestSuite(t *testing.T) {
+	suite.Run(t, new(CalculatorTestSuite))
 }
