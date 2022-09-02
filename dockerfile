@@ -6,7 +6,7 @@ WORKDIR /src
 COPY . .
 
 RUN go mod tidy
-RUN go build -o binary
+RUN go build -o binary gosimpletest/main
 
 FROM alpine
 WORKDIR /app
