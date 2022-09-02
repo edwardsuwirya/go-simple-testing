@@ -1,3 +1,4 @@
+FROM golang:alpine as build-env
 RUN apk update && apk add --no-cache git
 
 WORKDIR /src
