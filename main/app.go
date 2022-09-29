@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"fmt"
+	"gosimpletest/helpers"
 	"gosimpletest/services"
 )
 
@@ -11,17 +11,38 @@ func main() {
 	num2 := flag.Int("num2", 0, "second number")
 	opr := flag.String("opr", "add", "Calculator Operator")
 	flag.Parse()
+	showResult := helpers.Output{}
+	var result = 0
 	switch *opr {
 	case "add":
 		myCalc := services.Calculator{
 			*num1, *num2,
 		}
-		fmt.Println(myCalc.Add())
+		res, err := myCalc.Add()
+		if err != nil {
+			err := showResult.Error(err)
+			if err != nil {
+				return
+			}
+		} else {
+			result = res
+		}
 	case "sub":
 		myCalc := services.Calculator{
 			*num1, *num2,
 		}
-		fmt.Println(myCalc.Sub())
+		res, err := myCalc.Sub()
+		if err != nil {
+			err := showResult.Error(err)
+			if err != nil {
+				return
+			}
+		} else {
+			result = res
+		}
 	}
-
+	err := showResult.Console(result)
+	if err != nil {
+		return
+	}
 }

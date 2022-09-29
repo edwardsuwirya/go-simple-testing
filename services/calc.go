@@ -14,6 +14,6 @@ func (c *Calculator) Add() (int, error) {
 	return c.Num1 + c.Num2, nil
 }
 
-func (c *Calculator) Sub() int {
-	return c.Num1 - c.Num2
+func (c *Calculator) Sub() (int, error) {
+	return c.Num1 - c.Num2, nil
 }

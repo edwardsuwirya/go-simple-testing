@@ -37,7 +37,6 @@ func (suite *CalculatorTestSuite) TestCalculator_Add() {
 			assert.Nil(suite.T(), err)
 			assert.Equal(suite.T(), table.res, result)
 		}
-
 	}
 }
 
@@ -45,8 +44,9 @@ func (suite *CalculatorTestSuite) TestCalculator_Sub() {
 	suite.calcService.Num1 = 10
 	suite.calcService.Num2 = 1
 
-	result := suite.calcService.Sub()
+	result, err := suite.calcService.Sub()
 	assert.Equal(suite.T(), 9, result)
+	assert.Nil(suite.T(), err)
 }
 
 func TestCalculatorTestSuite(t *testing.T) {
