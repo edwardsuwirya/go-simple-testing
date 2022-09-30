@@ -1,3 +1,5 @@
+---
+contracts:
 - name: sum_number
   path: "calc?num1=1&num2=9&opr=add"
   method: GET
