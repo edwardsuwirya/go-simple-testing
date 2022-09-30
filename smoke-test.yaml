@@ -10,10 +10,10 @@ contracts:
   path: "calc?num1=1&num2=9&opr=abc"
   method: GET
   http_status_code: 422
-  response_body_contains: Unknown Operator
+  response_body_contains: "r/*Unknown Operator*/"
 
 - name: negatif_value
   path: "calc?num1=-1&num2=9&opr=abc"
   method: GET
   http_status_code: 422
-  response_body_contains: negatif
+  response_body_contains: "r/*negatif*"
