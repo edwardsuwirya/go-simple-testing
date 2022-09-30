@@ -33,8 +33,9 @@ func main() {
 			}
 			res, err := myCalc.Add()
 			if err != nil {
+				fmt.Println(err)
 				c.JSON(http.StatusUnprocessableEntity, gin.H{
-					"message": err,
+					"message": err.Error(),
 				})
 				return
 			} else {
@@ -47,7 +48,7 @@ func main() {
 			res, err := myCalc.Sub()
 			if err != nil {
 				c.JSON(http.StatusUnprocessableEntity, gin.H{
-					"message": err,
+					"message": err.Error(),
 				})
 				return
 			} else {

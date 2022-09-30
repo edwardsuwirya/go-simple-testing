@@ -1,0 +1,17 @@
+- name: sum_number
+  path: "calc?num1=1&num2=9&opr=add"
+  method: GET
+
+  response_body_contains: 10
+
+- name: wrong_operator
+  path: "calc?num1=1&num2=9&opr=abc"
+  method: GET
+  http_status_code: 422
+  response_body_contains: Unknown Operator
+
+- name: negatif_value
+  path: "calc?num1=-1&num2=9&opr=abc"
+  method: GET
+  http_status_code: 422
+  response_body_contains: negatif
